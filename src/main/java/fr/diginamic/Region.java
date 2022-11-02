@@ -30,6 +30,11 @@ public class Region {
 		return id;
 	}
 
+	@Override
+	public String toString() {
+		return "Region [id = " + id + ", nom = " + nom + "]";
+	}
+
 	/**
 	 * Setter pour l'attribut id
 	 * @param id the id to set

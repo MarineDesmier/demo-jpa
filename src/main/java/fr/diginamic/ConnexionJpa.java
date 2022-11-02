@@ -9,6 +9,7 @@ public class ConnexionJpa {
 
 	public static void main(String[] args) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("recensement");
+		//récupère la connexion de la bdd
 		EntityManager em = entityManagerFactory.createEntityManager();
 		
 		EntityTransaction transaction = em.getTransaction();
@@ -22,6 +23,9 @@ public class ConnexionJpa {
 		em.persist(region);
 		
 		transaction.commit();
+		
+		Region r = em.find(Region.class, 1);
+		System.out.println(r);
 	}
 
 }
