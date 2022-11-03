@@ -5,7 +5,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class InsertionVilleJpa {
+import fr.diginamic.tp2.Livre;
+
+public class LivreJpa {
 
 	public static void main(String[] args) {
 		
@@ -17,8 +19,8 @@ public class InsertionVilleJpa {
 		
 		transaction.begin();
 		
-		
-		
+		Livre book = em.find(Livre.class, 3);  
+		System.out.println(book);
 		transaction.commit();
 	}
 
