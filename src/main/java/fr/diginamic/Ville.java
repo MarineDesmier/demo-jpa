@@ -1,6 +1,8 @@
 package fr.diginamic;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,14 +11,21 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name = "villes")
 public class Ville {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_VIL")
 	private int id;
 
 	@Column(name = "NOM", length = 150, nullable = false, unique = false)
@@ -31,6 +40,16 @@ public class Ville {
 
 	@Enumerated(EnumType.STRING)
 	private Categorie categorie;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_REGION")
+	private Region region;
+
+	@ManyToMany
+	@JoinTable(name = "LIEN_VILLES_HABITANTS",
+			joinColumns = @JoinColumn(name = "ID_VILLE", referencedColumnName = "ID_VIL"),
+			inverseJoinColumns = @JoinColumn(name="ID_HABITANT", referencedColumnName = "ID_HAB"))
+	private List<Habitant> habitants = new ArrayList<Habitant>();
 
 	/**
 	 * @param nom
@@ -51,6 +70,22 @@ public class Ville {
 	 */
 	public Ville() {
 		super();
+	}
+	
+	/**
+	 * Getter pour l'attribut id 
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Setter pour l'attribut id
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**
@@ -123,6 +158,32 @@ public class Ville {
 	 */
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+
+	/**
+	 * Getter pour l'attribut region
+	 * 
+	 * @return the region
+	 */
+	public Region getRegion() {
+		return region;
+	}
+
+	/**
+	 * Setter pour l'attribut region
+	 * 
+	 * @param region the region to set
+	 */
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	/**
+	 * Getter pour l'attribut habitants 
+	 * @return the habitants
+	 */
+	public List<Habitant> getHabitants() {
+		return habitants;
 	}
 
 }

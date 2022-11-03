@@ -1,6 +1,5 @@
 package fr.diginamic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,46 +7,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "regions")
-public class Region {
+@Table(name = "habitants")
+public class Habitant {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_REG")
-	private Integer id;
+	@Column(name = "ID_HAB")
+	private int id;
 
-	@Column(name = "NOM", length = 30, nullable = false)
+	@Column(name = "NOM", length = 150, nullable = false, unique = false)
 	private String nom;
 
-	@OneToMany(mappedBy = "region")
-	private List<Ville> villes = new ArrayList<Ville>();
+	@Column(name = "PRENOM", length = 150, nullable = false, unique = false)
+	private String prenom;
 
-	/**
-	 * Constructeur sans argument
-	 */
-	public Region() {
+	@ManyToMany(mappedBy = "habitants")
+	private List<Ville> villes;
 
-	}
+	public Habitant() {
 
-	/**
-	 * @param id
-	 * @param nom
-	 * @param villes
-	 */
-	public Region(Integer id, String nom, List<Ville> villes) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		villes = new ArrayList<Ville>();
-	}
-
-	@Override
-	public String toString() {
-		return "Region [id = " + id + ", nom = " + nom + "]";
 	}
 
 	/**
@@ -55,7 +37,7 @@ public class Region {
 	 * 
 	 * @return the id
 	 */
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -64,7 +46,7 @@ public class Region {
 	 * 
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -87,7 +69,26 @@ public class Region {
 	}
 
 	/**
-	 * Getter pour l'attribut villes 
+	 * Getter pour l'attribut prenom
+	 * 
+	 * @return the prenom
+	 */
+	public String getPrenom() {
+		return prenom;
+	}
+
+	/**
+	 * Setter pour l'attribut prenom
+	 * 
+	 * @param prenom the prenom to set
+	 */
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	/**
+	 * Getter pour l'attribut villes
+	 * 
 	 * @return the villes
 	 */
 	public List<Ville> getVilles() {

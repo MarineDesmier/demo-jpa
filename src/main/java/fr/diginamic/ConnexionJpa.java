@@ -1,5 +1,7 @@
 package fr.diginamic;
 
+import java.util.Calendar;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -18,14 +20,53 @@ public class ConnexionJpa {
 		
 		// insertion de la table régions
 		Region region = new Region();
-		region.setId(3);
 		region.setNom("Occitanie");
 		em.persist(region);
 		
+		Region region1 = new Region();
+		region1.setNom("Saône et Loire");
+		em.persist(region1);
+		
+		Region region2 = new Region();
+		region2.setNom("Rhône");
+		em.persist(region2);
+		
+		// Calendar pour ma date
+		Calendar cal = Calendar.getInstance();
+		cal.set(2021, 6, 10);
+		
+		Ville v1 = new Ville();
+		v1.setNom("Mâcon");
+		v1.setCodePostal(71000);
+		v1.setDernierRecensement(cal.getTime());
+		v1.setCategorie(Categorie.MOYENNE);
+		v1.setRegion(region1);
+		
+		em.persist(v1);
+		
+		Calendar cal2 = Calendar.getInstance();
+		cal2.set(2015, 3, 17);
+		
+		Ville v2 = new Ville();
+		v2.setNom("Lyon");
+		v2.setCodePostal(69000);
+		v2.setDernierRecensement(cal2.getTime());
+		v2.setCategorie(Categorie.GRANDE);
+		v2.setRegion(region2);
+				
+		em.persist(v2);
+		
+		Habitant marineDesmier = new Habitant();
+		marineDesmier.setNom("DESMIER");
+		marineDesmier.setPrenom("Marine");
+		em.persist(marineDesmier);
+		
+		v1.getHabitants().add(marineDesmier);
+		
 		transaction.commit();
 		
-		Region r = em.find(Region.class, 1);
-		System.out.println(r);
+//		Region r = em.find(Region.class, 1);
+//		System.out.println(r);
 	}
 
 }
