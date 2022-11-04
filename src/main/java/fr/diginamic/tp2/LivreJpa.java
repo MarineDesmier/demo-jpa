@@ -19,6 +19,18 @@ public class LivreJpa {
 		
 		Livre book = em.find(Livre.class, 3);  
 		System.out.println(book);
+		
+		// afficher les tout emprunts en fonction d'un id
+		Emprunt emp1 = em.find(Emprunt.class, 2);
+		System.out.println(emp1);
+	
+		// affiche tout les emprunts d'un client
+		Client cli = em.find(Client.class, 1);
+		System.out.println(cli);
+		
+		Emprunt emp2 = em.find(Emprunt.class, 1);
+		System.out.println(emp2);
+		
 		transaction.commit();
 	}
 

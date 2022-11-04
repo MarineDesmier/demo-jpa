@@ -1,12 +1,16 @@
 package fr.diginamic.tp2;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +31,14 @@ public class Emprunt {
 	@Column(name = "DELAI")
 	private int delai;
 	
-//	@Column(name = "ID_CLIENT")
-//	private int id_client;
+	// un emprunt peut avoir plusieurs clients
+	@ManyToOne
+	@JoinColumn(name = "ID_CLIENT")
+	private Client client;
+	
+	@ManyToMany(mappedBy = "listEmprunt")
+	private List<Client> clients;
+	
 
 	/**
 	 * Constructeur vide
@@ -103,7 +113,8 @@ public class Emprunt {
 
 	@Override
 	public String toString() {
-		return "Emprunt [id=" + id + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", delai=" + delai + "]";
+		return "Emprunt [id = " + id + ", date_debut = " + date_debut + ", date_fin = " 
+				+ date_fin + ", delai = " + delai + ", client = " + client +"]";
 	}
 	
 }
