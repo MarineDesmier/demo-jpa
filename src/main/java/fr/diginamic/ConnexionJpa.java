@@ -56,17 +56,22 @@ public class ConnexionJpa {
 				
 		em.persist(v2);
 		
+		Adresse adresse = new Adresse();
+		adresse.setRue("91 rue Rambuteau");
+		adresse.setCodePostal(71000);
+		adresse.setVille("Mâcon");
+		
 		Habitant marineDesmier = new Habitant();
 		marineDesmier.setNom("DESMIER");
 		marineDesmier.setPrenom("Marine");
+		marineDesmier.setAdresse(adresse);
 		em.persist(marineDesmier);
 		
 		v1.getHabitants().add(marineDesmier);
 		
 		transaction.commit();
 		
-//		Region r = em.find(Region.class, 1);
-//		System.out.println(r);
+
 	}
 
 }

@@ -3,6 +3,7 @@ package fr.diginamic;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,9 @@ public class Habitant {
 	@ManyToMany(mappedBy = "habitants")
 	private List<Ville> villes;
 
+	@Embedded
+	private Adresse adresse;
+	
 	public Habitant() {
 
 	}
@@ -93,6 +97,30 @@ public class Habitant {
 	 */
 	public List<Ville> getVilles() {
 		return villes;
+	}
+
+	/**
+	 * Getter pour l'attribut adresse 
+	 * @return the adresse
+	 */
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	/**
+	 * Setter pour l'attribut adresse
+	 * @param adresse the adresse to set
+	 */
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	/**
+	 * Setter pour l'attribut villes
+	 * @param villes the villes to set
+	 */
+	public void setVilles(List<Ville> villes) {
+		this.villes = villes;
 	}
 
 }
