@@ -8,14 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 @Entity
 @Table(name = "client")
@@ -32,13 +26,6 @@ public class Client {
 	@Column(name = "PRENOM")
 	private String prenom;
 	
-	// un client peut avoir plusieurs emprunts de livre
-	@ManyToMany
-	@JoinTable(name = "compo",
-		joinColumns = @JoinColumn(name = "ID_LIV", referencedColumnName = "ID"),
-		inverseJoinColumns = @JoinColumn(name="ID_EMP", referencedColumnName = "ID"))
-	private List<Emprunt> listEmprunt = new ArrayList<Emprunt>();
-
 	// un client peut avoir plusieurs emprunt
 	@OneToMany(mappedBy = "client")
 	private List<Emprunt> emprunts = new ArrayList<Emprunt>();

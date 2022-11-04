@@ -1,5 +1,6 @@
 package fr.diginamic.tp2;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "emprunt")
@@ -23,9 +26,11 @@ public class Emprunt {
 	private int id;
 	
 	@Column(name = "DATE_DEBUT")
+	@Temporal(TemporalType.DATE)
 	private Date date_debut;
 	
 	@Column(name = "DATE_FIN")
+	@Temporal(TemporalType.DATE)
 	private Date date_fin;
 	
 	@Column(name = "DELAI")
@@ -36,8 +41,8 @@ public class Emprunt {
 	@JoinColumn(name = "ID_CLIENT")
 	private Client client;
 	
-	@ManyToMany(mappedBy = "listEmprunt")
-	private List<Client> clients;
+	@ManyToMany(mappedBy = "emprunts")
+	private List<Livre> livres = new ArrayList<Livre>();
 	
 
 	/**
@@ -115,6 +120,30 @@ public class Emprunt {
 	public String toString() {
 		return "Emprunt [id = " + id + ", date_debut = " + date_debut + ", date_fin = " 
 				+ date_fin + ", delai = " + delai + ", client = " + client +"]";
+	}
+
+	/**
+	 * Getter pour l'attribut client 
+	 * @return the client
+	 */
+	public Client getClient() {
+		return client;
+	}
+
+	/**
+	 * Setter pour l'attribut client
+	 * @param client the client to set
+	 */
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	/**
+	 * Getter pour l'attribut livres 
+	 * @return the livres
+	 */
+	public List<Livre> getLivres() {
+		return livres;
 	}
 	
 }

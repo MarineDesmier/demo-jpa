@@ -28,6 +28,11 @@ public class LivreJpa {
 		Client cli = em.find(Client.class, 1);
 		System.out.println(cli);
 		
+		
+		for(Emprunt emp3 : book.getEmprunts()) {
+			System.out.println(emp3);
+		}
+		
 		Emprunt emp2 = em.find(Emprunt.class, 1);
 		System.out.println(emp2);
 		
